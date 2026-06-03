@@ -1,5 +1,5 @@
 # Blowfish Extractor
-A Python script to extract _blowfish keys_ from a DS or DSi BIOS dump.
+A Python script to extract _blowfish keys_ from a 3DS' Bios11 BootROM.
 
 More information about the blowfish keys can be found in [GBATek](https://problemkaputt.de/gbatek.htm#dsencryptionbygamecodeidcodekey1).
 
@@ -7,12 +7,12 @@ More information about the blowfish keys can be found in [GBATek](https://proble
 
 Start by cloning this repository using Git:
 ```shell
-git clone https://github.com/xbmbmx/py-nds-blowfish-extractor.git
+git clone https://github.com/Cachop0/py-3ds-blowfish-extractor.git
 ```
 
 Enter the directory for this project:
 ```shell
-cd py-nds-blowfish-extractor
+cd py-3ds-blowfish-extractor
 ```
 
 **(optional, but recommended)** I recommend creating a virtual environment for Python based tools like this one. This command will create a virtual environment named `venv` in the project folder:
@@ -44,16 +44,16 @@ python ./extractor.py --help
 For the current version of `extractor.py`, this should output:
 
 ```txt
-usage: extractor.py [-h] -s STARTADDRESS -b BIOSFILE [-o OUTFILE] [-f]
+usage: extractor.py [-h] -s STARTADDRESS -b BOOT11FILE [-o OUTFILE] [-f]
 
-Extract blowfish keys from dumped DS/DSi BIOS files
+Extract blowfish keys from dumped 3DS Boot11
 
 options:
   -h, --help            show this help message and exit
   -s STARTADDRESS, --startaddress STARTADDRESS
                         The address to start reading from, in HEX (0xFF) or INT (255)
-  -b BIOSFILE, --biosfile BIOSFILE
-                        The BIOS file to read the keys from
+  -b BOOT11FILE, --boot11file BOOT11FILE
+                        The Boot11 file to read the keys from
   -o OUTFILE, --outfile OUTFILE
                         The file to output the extracted keys to
   -f, --force           Overwrite the output file if already present
@@ -67,32 +67,14 @@ python ./extractor.py -s 0x30 -b ./bios7.bin -o ./blowfish-keys.bin -f
 
 Continue reading if you do not yet have a bios dump to extract these keys from.
 
-## Obtaining a BIOS dump
-You should always dump the BIOS from _your personally owned_ device. I do not promote the sharing of these files.
+## Obtaining a 3DS Boot11
+You should always dump Boot11 from _your personally owned_ device. I do not promote the sharing of these files.
 
-The easiest method to extract a BIOS dump from your DSi console is using [dsibiosdumper (download)](https://melonds.kuribo64.net/downloads/dsibiosdumper.7z) | [dsibiosdumper (source)](https://github.com/Arisotura/dsibiosdumper).
+The easiest method to extract the Boot11 file 
 
-Launch `dsibiosdumper.nds` through Unlaunch. Unlaunch lists this file as `DSi_dumper`.
-
-<img alt="Unlaunch listing DSi_dumper Image" src="./Unlaunch_DSi_dumper.png" width="400"/>
-
-Once launched, you should be greeted by the main screen for `dsibiosdumper.nds`.
-
-<img alt="DSi Dumper Menu Image" src="./DSi_dumper_menu.png" width="400"/>
-
-Press the `A` button to dump all contents. The `dsidump` folder on the root of your SD card should now contain the following 6 files:
-
-```
-- bios7.bin
-- bios7i.bin
-- bios9.bin
-- bios9i.bin
-- dsfirmware.bin
-- nand.bin
-```
-
-The files prefixed with `bios` can be used to extract blowfish keys. Locations of blowfish keys in each of the files can be found in [GBATek](https://problemkaputt.de/gbatek.htm#dsencryptionbygamecodeidcodekey1). The `-s`/`--startaddress` parameter should be set accordingly when executing `extractor.py`
+Locations of blowfish keys in each of the files can be found in [GBATek](https://problemkaputt.de/gbatek.htm#dsencryptionbygamecodeidcodekey1). The `-s`/`--startaddress` parameter should be set accordingly when executing `extractor.py`
 
 ## Thanks and references
+- [xbmbmx](https://github.com/xbmbmx), for the original [py-nds-blowfish-extractor](https://github.com/xbmbmx/py-nds-blowfish-extractor)
 - Martin Korth, for his [GBATek reference document](http://problemkaputt.de/gbatek-index.htm).
 - [Arisotura](https://github.com/Arisotura), for [dsibiosdumper](https://github.com/Arisotura/dsibiosdumper).
