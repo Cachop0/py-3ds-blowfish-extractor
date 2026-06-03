@@ -31,11 +31,11 @@ def main(startaddress: int, biosfile: Path, outfile: Path) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-            description='Extract blowfish keys from dumped DS/DSi BIOS files'
+            description='Extract blowfish keys from dumped 3DS Boot11 files'
             )
 
     parser.add_argument('-s', '--startaddress', type=str, help='The address to start reading from, in HEX (0xFF) or INT (255)', required=True)
-    parser.add_argument('-b', '--biosfile', type=str, help='The BIOS file to read the keys from', required=True)
+    parser.add_argument('-b', '--boot11file', type=str, help='The Boot11 file to read the keys from', required=True)
     parser.add_argument('-o', '--outfile', type=str, default='./blowfish-keys.bin', help='The file to output the extracted keys to', required=False)
     parser.add_argument('-f', '--force', help='Overwrite the output file if already present', action='store_true', required=False)
     args = parser.parse_args()
